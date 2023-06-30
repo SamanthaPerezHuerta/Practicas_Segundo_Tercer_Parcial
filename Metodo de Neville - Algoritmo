@@ -1,0 +1,25 @@
+#ALGORITMO: MÉTODO DE INTERPOLACIÓN DE NEVILLE
+
+import numpy as np
+     
+#Se tienen los valotes iniciales en la tabla: 
+x=[1.0, 1.3, 1.6, 1.9, 2.2]
+y=[0.7651977, 0.6200860, 0.4554022, 0.2818186, 0.1103623]
+
+#Se prosigue por la matriz A
+A=np.zeros((len(x),len(y)))
+
+#Se le asigna la variable "a" al número a interpolar
+a=1.5
+
+#Se calculan las las filas y columnas con:
+for r in range(0,len(y)):
+  A[r][0]=y[r]
+
+for i in range(1,len(y)):
+  for j in range(1,i+1):
+    A[i][j]=((a- x[i-j])*(A[i][j-1])-(a-x[i])*(A[i-1][j-1]))/(x[i]-x[i-j])
+
+#Se muestran en pantalla los resultados:
+print("Los valores arrojados para la interpolación de a= 1.5 son:")
+print(A)
